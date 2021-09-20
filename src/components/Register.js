@@ -60,6 +60,7 @@ function Register() {
               maxLength="40"
               onChange={handleChangeInput}
               value={values.name || ""}
+              pattern="[a-zA-Zа-яА-Я- ]*"
             />
           </label>
           <span className="register__form-iput-text-error">
@@ -89,13 +90,12 @@ function Register() {
             <input
               type="tel"
               name="tel"
-              placeholder="Введите Ваш пароль"
+              placeholder="Введите номер телефона"
               className="register__form-iput-text"
               required
-              minLength="11"
-              maxLength="11"
               onChange={handleChangeInput}
               value={values.tel || ""}
+              pattern="(8|\+7)[-(]?\d{3}[-)]?\d{3}-?\d{2}-?\d{2}$"
             />
           </label>
           <span className="register__form-iput-text-error">
