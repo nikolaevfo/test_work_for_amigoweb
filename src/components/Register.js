@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -15,7 +14,6 @@ function Register() {
     isValid,
     resetForm,
   } = useFormWithValidation();
-  // const errorsForm = {}
 
   function handleRegisterSubmit(e) {
     e.preventDefault();
@@ -26,11 +24,9 @@ function Register() {
     setIsLangOptionsOpen(!isLangOptionsOpen);
   }
 
-  // function handleLangItemClick(e) {
-  //   console.log(e.target);
-  //   console.log(values);
-  //   handleChangeValue(e.target);
-  // }
+  function handleChangeInputLang() {
+    // Заглушка
+  }
 
   return (
     <section className="register">
@@ -113,7 +109,7 @@ function Register() {
               minLength="11"
               maxLength="11"
               value={values.lang || ""}
-              // onChange={handleChangeInput}
+              onChange={handleChangeInputLang}
               onClick={handleLangOptionsClick}
             />
             <ul

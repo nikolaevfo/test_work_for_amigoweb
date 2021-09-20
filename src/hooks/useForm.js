@@ -4,36 +4,23 @@ function useFormWithValidation() {
   const [values, setValues] = React.useState({});
   const [errors, setErrors] = React.useState({});
   const [isValid, setIsValid] = React.useState(false);
-
-  const debounce = (fn, ms) => {
-    let timeout;
-    return function () {
-      const fnCall = () => {
-        fn.apply(this, arguments);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(fnCall, ms);
-    };
-  };
+  const [timeoutApp, setTimeoutApp] = React.useState(null);
 
   const handleChangeInput = (e) => {
     const input = e.target;
     const { name } = input;
     const { value } = input;
 
-    // setErrors({ ...errors, [name]: "" });
+    const setErrorsCall = () => {
+      setErrors({ ...errors, [name]: input.validationMessage });
+      setIsValid(input.closest("form").checkValidity());
+    };
+
+    setErrors({ ...errors, [name]: "" });
     setValues({ ...values, [name]: value });
-    setErrors({ ...errors, [name]: input.validationMessage });
-    setIsValid(input.closest("form").checkValidity());
+    clearTimeout(timeoutApp);
+    setTimeoutApp(setTimeout(setErrorsCall, 500));
   };
-
-  // const handleChangeValid = (e) => {
-  //   const input = e.target;
-  //   const { name } = input;
-
-  //   setErrors({ ...errors, [name]: input.validationMessage });
-  //   setIsValid(input.closest("form").checkValidity());
-  // };
 
   const handleChangeOptions = (e) => {
     const element = e.target;
@@ -47,8 +34,6 @@ function useFormWithValidation() {
     setIsValid(input.closest("form").checkValidity());
   };
 
-  const handleChangeDebounce = debounce(handleChangeInput, 1300);
-
   // мемоизация, не триггерит useEffect
   const resetForm = useCallback(() => {
     setValues({});
@@ -61,7 +46,6 @@ function useFormWithValidation() {
     errors,
     isValid,
     handleChangeInput,
-    handleChangeDebounce,
     handleChangeOptions,
     setValues,
     resetForm,

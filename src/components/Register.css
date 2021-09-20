@@ -246,27 +246,9 @@
 }
 
 @media (max-width: 767px) {
-  .register__container {
-    max-width: 400px;
-    width: calc(100% - 60px);
-    padding-top: 50px;
-    flex-grow: 1;
-    align-items: center;
-  }
-  .register__logo-link{
-    align-self: center;
-  }
-  .register__form {
-    flex-grow: 1;
-  }
-  .register__form-button-reg{
-    margin-top: auto;
-  }
-  .register__link-text {
-    margin-bottom: 30px;
-  }
-  .register__link-text{
-    font-size: 12px;
-    line-height: 15px;
+  .register {
+    min-width: 360px;
+    max-width: 460px;
+    width: calc(100% - 40px);
   }
 }
